@@ -1,0 +1,63 @@
+html{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.calculator{
+  width: 400px;
+  background-color: green;
+  text-align: center;
+  padding: 10px;
+}
+#displayVisor{
+  background-color: black;
+  color: white;
+  text-align: end;
+  margin-top: 0;
+  height: 53px;
+}
+#displayVisor p:last-of-type{
+  margin: 0;
+  font-size: 1.8em;
+  margin-top: 5px;
+  margin-right: 4px;
+}
+#display{
+  margin: 0;
+  font-size: 1em;
+  margin-top: 10px;
+  margin-right: 4px;
+}
+#ButtonsGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0.03em;
+}
+.buttonDiv{
+  height: 80px;
+}
+
+button{
+  justify-self: stretch;
+  width: 100%;
+  height: 100%;
+}
+div#Clear.buttonDiv{
+  grid-column: span 2;
+}
+div#Zero.buttonDiv{
+  grid-column: span 2;
+}
+div#Equals.buttonDiv{
+  grid-row: span 2;
+  height: auto;
+}
+
