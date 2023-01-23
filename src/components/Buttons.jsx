@@ -3,27 +3,27 @@ import { evaluate } from 'mathjs'
 
 
 
-function Buttons({setSentence, setActualValue, sentence, actualValue}) {
+function Buttons({setSentence, setActualValue, sentence, actualValue, resultIsDisplayed, setBoolean}) {
 
     const clear = function(){
-        console.log('clear')
         setSentence('0')
         setActualValue('0')
     }
     const equals = function(e){
-        console.log(e.target.innerHTML)
+        setBoolean(true)
         let result = evaluate(sentence)
-        console.log(result)
         setActualValue(result.toString())
         setSentence(result.toString())
+        
+        
     }
     const add = function(e) {
         let str = e.target.innerHTML;
         let sentenceArray = sentence.split(/[\+\-\*\/]/);
         let lastChar = sentence.slice(-1);
         let twoLastChar = sentence[sentence.length-2];
-        console.log(twoLastChar)
-    
+
+
         if (str === '.' && (sentenceArray[sentenceArray.length -1].includes('.') || actualValue.includes('.'))) {
             return;
         }
@@ -31,21 +31,35 @@ function Buttons({setSentence, setActualValue, sentence, actualValue}) {
         if(str === '/' || str === '*' || str === '+' || str === '-') {
             if(str==='-' &&(lastChar === '/' || lastChar === '*' || lastChar === '+')){
                 setSentence(sentence + str);
+                setBoolean(false)
             }
             else if(lastChar === '-' && (str === '/' || str === '*' || str === '+') && (twoLastChar==='/'||twoLastChar==='*'||twoLastChar==='+')){
                 setSentence(sentence.slice(0,-2) + str)
+                setBoolean(false)
             }
             else if (lastChar === '-' && (str === '/' || str === '*' || str === '+')) {
                 setSentence(sentence.slice(0,-1) + str)
+                setBoolean(false)
             } else if(lastChar === '/' || lastChar === '*' || lastChar === '+') {
                 setSentence(sentence.slice(0,-1) + str)
+                setBoolean(false)
             } else {
                 setSentence(sentence + str);
+                setBoolean(false)
             }
             setActualValue("0");
+            setBoolean(false)
         }else {
-            setSentence(sentence === '0' ? str : sentence + str);
-            setActualValue(actualValue === '0' ? str : actualValue + str);
+            if(resultIsDisplayed && (str==='0'||str==='1'||str==='2'||str==='3'||str==='4'||str==='5'||str==='6'||str==='7'||str==='8'||str==='9')){
+                setBoolean(false)
+                setSentence(str)
+                setActualValue(str)  
+            }else{
+                setSentence(sentence === '0' ? str : sentence + str);
+                setActualValue(actualValue === '0' ? str : actualValue + str);
+                setBoolean(false)
+            }
+
         }
     }
     

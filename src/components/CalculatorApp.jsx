@@ -11,7 +11,7 @@ function CalculatorApp() {
   return (
     <div className='calculator'>
         <Display sentence={sentence} actualValue={actualValue}/>
-        <ButtonsGrid sentence={sentence} actualValue={actualValue} setActualValue={setActualValue} setSentence={setSentence} />
+        <ButtonsGrid sentence={sentence} actualValue={actualValue} setActualValue={setActualValue} setSentence={setSentence} resultIsDisplayed={resultIsDisplayed} setBoolean={setBoolean} />
     </div>
   )
 }
