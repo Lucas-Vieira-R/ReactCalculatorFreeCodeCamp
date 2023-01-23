@@ -1,5 +1,5 @@
 import React from 'react'
-import { evaluateInfix } from 'calculator-lib'
+import { evaluate } from 'mathjs'
 
 
 
@@ -12,35 +12,37 @@ function Buttons({setSentence, setActualValue, sentence, actualValue}) {
     }
     const equals = function(e){
         console.log(e.target.innerHTML)
-        let result = evaluateInfix(sentence)
+        let result = evaluate(sentence)
         console.log(result)
         setActualValue(result.toString())
         setSentence(result.toString())
     }
     const add = function(e) {
-        console.log(e.target.innerHTML)
         let str = e.target.innerHTML;
         let sentenceArray = sentence.split(/[\+\-\*\/]/);
         let lastChar = sentence.slice(-1);
+        let twoLastChar = sentence[sentence.length-2];
+        console.log(twoLastChar)
     
         if (str === '.' && (sentenceArray[sentenceArray.length -1].includes('.') || actualValue.includes('.'))) {
             return;
         }
     
-        if(str === '/' || str === '*' || str === '+') {
-            if(lastChar === '/' || lastChar === '*' || lastChar === '+') {
+        if(str === '/' || str === '*' || str === '+' || str === '-') {
+            if(str==='-' &&(lastChar === '/' || lastChar === '*' || lastChar === '+')){
+                setSentence(sentence + str);
+            }
+            else if(lastChar === '-' && (str === '/' || str === '*' || str === '+') && (twoLastChar==='/'||twoLastChar==='*'||twoLastChar==='+')){
+                setSentence(sentence.slice(0,-2) + str)
+            }
+            else if (lastChar === '-' && (str === '/' || str === '*' || str === '+')) {
+                setSentence(sentence.slice(0,-1) + str)
+            } else if(lastChar === '/' || lastChar === '*' || lastChar === '+') {
                 setSentence(sentence.slice(0,-1) + str)
             } else {
                 setSentence(sentence + str);
             }
             setActualValue("0");
-        } else if(str === '-') {
-            if(lastChar === '/' || lastChar === '*' || lastChar === '+' || lastChar === '-' || sentence === '') {
-                setSentence(sentence === '0' ? str : sentence + str)
-            } else {
-                setSentence(sentence === '0' ? str : sentence + str);
-            }
-            setActualValue(str);
         }else {
             setSentence(sentence === '0' ? str : sentence + str);
             setActualValue(actualValue === '0' ? str : actualValue + str);

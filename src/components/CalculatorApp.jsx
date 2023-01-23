@@ -6,6 +6,7 @@ import ButtonsGrid from './ButtonsGrid'
 function CalculatorApp() {
     const [sentence, setSentence] = useState('0')
     const [actualValue, setActualValue] = useState('0')
+    const [resultIsDisplayed, setBoolean] = useState(false)
 
   return (
     <div className='calculator'>
