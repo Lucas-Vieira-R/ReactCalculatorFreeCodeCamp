@@ -1,15 +1,19 @@
 import React from 'react'
 import { evaluate } from 'mathjs'
-
+import useSound from 'use-sound'
+import KeySound from '../audio/KeySound.mp3'
 
 
 function Buttons({setSentence, setActualValue, sentence, actualValue, resultIsDisplayed, setBoolean}) {
+    const [playSound] = useSound(KeySound)
 
     const clear = function(){
+        playSound()
         setSentence('0')
         setActualValue('0')
     }
     const equals = function(e){
+        playSound()
         setBoolean(true)
         let result = evaluate(sentence)
         setActualValue(result.toString())
@@ -18,6 +22,7 @@ function Buttons({setSentence, setActualValue, sentence, actualValue, resultIsDi
         
     }
     const add = function(e) {
+        playSound()
         let str = e.target.innerHTML;
         let sentenceArray = sentence.split(/[\+\-\*\/]/);
         let lastChar = sentence.slice(-1);

@@ -1,27 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,700;1,400&display=swap');
 html{
   border: 0;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background-image: linear-gradient(to right top, #c2f0ff, #c3e4fd, #c9d8f6, #d0cbe9, #d5bfd9);
+  font-family: 'Lato',sans-serif;
 }
 body{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 97.7vh;
 }
 .calculator{
   width: 400px;
-  background-color: green;
+  background-color: #442b48;
   text-align: center;
   padding: 10px;
+  border-radius: 4px;
+  -webkit-box-shadow:0px 0px 263px 71px rgba(4,66,180,0.3),12px 12px 0px -3px rgba(9,24,52,0.4);
+  -moz-box-shadow: 0px 0px 263px 71px rgba(4,66,180,0.3),12px 12px 0px -3px rgba(9,24,52,0.4);
+  box-shadow: 0px 0px 263px 71px rgba(4,66,180,0.3),12px 12px 0px -3px rgba(9,24,52,0.4);
+  border: 1px solid rgba(255,255,255, 0.9);
+  outline: 1px solid rgba(255,255,255, 0.4);
+  
 }
 #displayVisor{
   background-color: black;
   color: white;
   text-align: end;
   margin-top: 0;
-  height: 53px;
+  height: 55px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
 }
 #displayVisor p:last-of-type{
   margin: 0;
@@ -39,16 +53,30 @@ body{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 0.03em;
+  grid-gap: 0.2em;
 }
 .buttonDiv{
   height: 80px;
 }
 
 button{
+  background-color: #E0E0E0;
+  font-size: large;
+  font-weight: bold;
   justify-self: stretch;
   width: 100%;
   height: 100%;
+  border-radius: 4px;
+  border: none;
+  animation: all ease-in-out;
+}
+button:hover{
+  background-color: #DCE6F9;
+  border: 1px solid gray;
+}
+button:active{
+  background-color: #0F2857;
+  border: 1px solid black;
 }
 div#Clear.buttonDiv{
   grid-column: span 2;
