@@ -6,7 +6,7 @@ import CalculatorApp from './components/CalculatorApp'
 function App() {
 
   return (
-    <CalculatorApp />
+    <CalculatorApp value="notranslate" />
 )
 }
 

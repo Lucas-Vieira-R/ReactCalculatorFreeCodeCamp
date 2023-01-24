@@ -4,16 +4,20 @@ import useSound from 'use-sound'
 import KeySound from '../audio/KeySound.mp3'
 
 
-function Buttons({setSentence, setActualValue, sentence, actualValue, resultIsDisplayed, setBoolean}) {
+function Buttons({setSentence, setActualValue, sentence, actualValue, resultIsDisplayed, setBoolean, soundPower}) {
     const [playSound] = useSound(KeySound)
 
     const clear = function(){
-        playSound()
+        if(soundPower==='ON'){
+            playSound()
+        }
         setSentence('0')
         setActualValue('0')
     }
     const equals = function(e){
-        playSound()
+        if(soundPower==='ON'){
+            playSound()
+        }
         setBoolean(true)
         let result = evaluate(sentence)
         setActualValue(result.toString())
@@ -22,7 +26,9 @@ function Buttons({setSentence, setActualValue, sentence, actualValue, resultIsDi
         
     }
     const add = function(e) {
-        playSound()
+        if(soundPower==='ON'){
+            playSound()
+        }
         let str = e.target.innerHTML;
         let sentenceArray = sentence.split(/[\+\-\*\/]/);
         let lastChar = sentence.slice(-1);
@@ -90,7 +96,9 @@ function Buttons({setSentence, setActualValue, sentence, actualValue, resultIsDi
                     {'value':'.','id':'decimal','onclick':add,'divId':'Decimal'}]
 
   return (
-    <div id='ButtonsGrid'>{values.map(value => <div className='buttonDiv' id={value.divId}><button id={value.id} onClick={value.onclick}>{value.value}</button></div>)}</div>
+    <div id='ButtonsGrid'>
+        {values.map(value => <div className='buttonDiv' id={value.divId}><button id={value.id} onClick={value.onclick}>{value.value}</button></div>)}
+    </div>
   )
 }
 
